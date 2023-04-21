@@ -26,7 +26,7 @@ const tagsController = {
             res.json(getTag);
         } else {
             res.status(404).json({
-                error: `Le tag avec l'id = ${req.params.id} n'existe pas !`,
+                error: `Le tag avec l'id = ${req.params.id} n'existe pas !`
             });
         }
     } catch(error) {
@@ -45,7 +45,7 @@ const tagsController = {
             const addTag = await Tag.create(req.body);
             res.json({
                 message: "le tag a bien été crée",
-                tag: addTag,
+                tag: addTag
             });
             adminLog.log('info', {                                          // Log l'action de création d'un tag
                 url: req.url,
@@ -80,7 +80,7 @@ const tagsController = {
                 const tag = await Tag.update(req.params.id, req.body);
                 res.json({
                     message: "le tag a bien été mise à jour",
-                    tag: tag,
+                    tag: tag
                 });
                 adminLog.log('info', {                                          // Log l'action de modification d'un tag
                     url: req.url,
@@ -115,7 +115,7 @@ const tagsController = {
             const tag = await Tag.delete(req.params.id);
             res.json({
                 message: "le tag a bien été supprimé",
-                tag: tag,
+                tag: tag
             });
             adminLog.log('info', {                                      // Log l'action de suppression d'un tag
                 url: req.url,
