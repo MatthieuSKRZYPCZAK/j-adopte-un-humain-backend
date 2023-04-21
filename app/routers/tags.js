@@ -11,7 +11,8 @@ const router = express.Router();
 router.get('/tags', auth.authMiddleware(['membre','staff', 'admin']),  controller.tagsController.getAll);
 router.post('/tag', auth.authMiddleware(['staff', 'admin']), validation.check(schemaTag.create(),"body"), controller.tagsController.addTag);
 router.get('/tag/:id', auth.authMiddleware(['membre','staff', 'admin']), controller.tagsController.getTag);
-router.patch('/tag/:id', auth.authMiddleware(['staff', 'admin']), validation.check(schemaTag.update(),"body"), controller.tagsController.updateTag);
+router.patch('/tag/:id', auth.authMiddleware(['staff', 'admin']), controller.tagsController.updateTag);
+// router.patch('/tag/:id', auth.authMiddleware(['staff', 'admin']), validation.check(schemaTag.update(),"body"), controller.tagsController.updateTag);
 router.delete('/tag/:id', auth.authMiddleware(['staff', 'admin']), controller.tagsController.deleteTag);
 
 export default router;
