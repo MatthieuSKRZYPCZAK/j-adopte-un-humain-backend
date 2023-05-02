@@ -8,7 +8,7 @@ import schemaRegister from "../schemas/registerBody.js";
 const router = express.Router();
 
 router.post("/login", validation.check(schemaRegister.login(),"body"), authController.checkLogin);
-router.post("/register", validation.check(schemaRegister.create(),"body"), usersController.addUser);
+router.post("/register", auth.authMiddleware(['admin']), validation.check(schemaRegister.create(),"body"), usersController.addUser);
 router.get("/token", auth.checkToken);
 
 export default router;

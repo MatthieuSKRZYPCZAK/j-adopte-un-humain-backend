@@ -23,6 +23,12 @@ const securityService = {
             req.user = userRole[0];   // je stocke le profil role utilisateur
 
             console.log("token validé !", userToken, "Role : ", req.user.name);
+            if (roles.indexOf(req.user.name) === -1) {                                // Si le nom est présent renvoie son index dans le tableau (entier positif ou nul)
+              return res.status(403).json({ message: "Vous n'êtes pas autorisé" });   // Si le nom n'est pas trouvé renvoie -1
+            }
+        
+            // L'utilisateur est authentifié et autorisé, passer au middleware suivant
+            next();
             
           } catch(err) {
             return res.status(401).json({ message: 'Token invalide' });
@@ -30,12 +36,7 @@ const securityService = {
       
           // Vérifier si l'utilisateur a le rôle requis pour accéder à la route
           // console.log("résultat roles : ", roles.indexOf(req.user.name));
-          if (roles.indexOf(req.user.name) === -1) {                                // Si le nom est présent renvoie son index dans le tableau (entier positif ou nul)
-            return res.status(403).json({ message: "Vous n'êtes pas autorisé" });   // Si le nom n'est pas trouvé renvoie -1
-          }
-      
-          // L'utilisateur est authentifié et autorisé, passer au middleware suivant
-          next();
+
         }
       },
 
