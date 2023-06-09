@@ -10,8 +10,8 @@ const router = express.Router();
 // Routes des membres
 router.get('/users', auth.authMiddleware(['staff', 'admin']), controller.usersController.getAll);
 router.get('/user/:id', auth.authMiddleware(['membre', 'staff', 'admin']), controller.usersController.getUser);
-router.patch('/user/:id', auth.authMiddleware(['membre', 'staff', 'admin']), validation.check(schemaUser.update(),"body"), controller.usersController.updateUser);
-router.delete('/user/:id', auth.authMiddleware(['membre', 'staff', 'admin']), controller.usersController.deleteUser);
+router.patch('/user/:id', auth.authMiddleware(['admin']), validation.check(schemaUser.update(),"body"), controller.usersController.updateUser);
+router.delete('/user/:id', auth.authMiddleware(['admin']), controller.usersController.deleteUser);
 
 // Routes admin/staff
 router.get('/admin/user/:id', auth.authMiddleware(['staff', 'admin']), controller.usersController.adminGetUser);
