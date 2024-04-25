@@ -51,6 +51,11 @@ app.use(express.urlencoded({ extended: true }));
 /* Mise en place du router */
 app.use("/api",authRouter, usersRouter, animalsRouter, tagsRouter, rolesRouter, photosRouter, adoptRouter);
 
+/* redirect */
+app.use("/", (req, res) => {
+    res.redirect('https://bibbou.fr');
+})
+
 /* gestion globale des erreurs */
 app.use(errorService.manage);
 
